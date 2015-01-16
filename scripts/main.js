@@ -233,13 +233,21 @@
   renderer = new THREE.WebGLRenderer();
 
   camera = new THREE.PerspectiveCamera(O.VIEW_ANGLE, O.ASPECT, O.NEAR, O.FAR);
+  camera2 = new THREE.PerspectiveCamera(O.VIEW_ANGLE, O.ASPECT, O.NEAR, O.FAR);
 
   scene = new THREE.Scene();
+  scene2 = new THREE.Scene();
+
 
   scene.add(camera);
+  scene2.add(camera2);
 
   camera.position.z = 55;
 
+  camera2.position.z = -55;
+  camera2.rotation.y = 180 * Math.PI / 180;
+
+  console.log(camera);
   renderer.setSize(O.WIDTH, O.HEIGHT);
 
   renderer.domElement.setAttribute("id", "canvasId");
@@ -267,7 +275,7 @@
   scene.add(topWall);
 
   leftWall = new THREE.Mesh(new THREE.CubeGeometry(1, 20, 60), new THREE.MeshLambertMaterial({
-    color: 0x666666
+    color: 0x666666 
   }));
 
   leftWall.position.set(-15.5, 0, 0);
@@ -309,7 +317,7 @@
   ];
 
   ball = new Ball(0, 0, 0);
-
+console.log(ball)
   scene.add(ball.object);
 
   playerPaddle = new Paddle(29.5, 6, 5, 0xFF7F00, new PlayerController, false);
@@ -375,6 +383,7 @@
       ball.reset();
     }
     renderer.render(scene, camera);
+
     return requestAnimationFrame(update);
   };
 
